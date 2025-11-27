@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <title>NCP Diaspora UAE – Official Membership & Media Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="National Citizen Party (NCP) – Diaspora UAE official membership, media & coordination portal."
+  />
+
+  <!-- Google Font (Bangla friendly) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --primary: #0b6a3b;      /* main green */
+      --primary-dark: #074626;
+      --accent: #f4b400;       /* gold */
+      --bg: #f5f7fb;
+      --text: #111827;
+      --muted: #6b7280;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --danger: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Hind Siliguri", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(245, 247, 251, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      gap: 1.5rem;
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #16a34a, #065f46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 8px 18px rgba(15, 118, 110, 0.35);
+    }
+
+    .logo-text-main {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .logo-text-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--primary-dark);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.55rem 1.3rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      box-shadow: 0 10px 20px rgba(4, 120, 87, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(4, 120, 87, 0.55);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--primary);
+      color: var(--primary-dark);
+      background: #ecfdf5;
+    }
+
+    .btn-outline:hover {
+      background: #dcfce7;
+    }
+
+    .btn-ghost {
+      border: 1px dashed var(--border);
+      background: #ffffff;
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      color: var(--primary-dark);
+      background: #ecfdf5;
+      border: 1px solid rgba(34, 197, 94, 0.5);
+      margin-bottom: 0.7rem;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-title span {
+      color: var(--primary-dark);
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--muted);
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at 0 0, #bbf7d0, #ecfeff);
+      border-radius: 1.5rem;
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 18px 40px rgba(15, 118, 110, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0f766e;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .hero-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #052e16;
+    }
+
+    .hero-card-list {
+      font-size: 0.8rem;
+      color: #064e3b;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-card-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-badge-floating {
+      position: absolute;
+      right: 0.85rem;
+      bottom: 0.9rem;
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(6, 95, 70, 0.95);
+      color: #ecfdf5;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Sections */
+    section {
+      padding: 2.5rem 0 2rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Cards & layout */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Join section + embed */
+    .join-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.3rem;
+      align-items: start;
+    }
+
+    .tag-list {
+      list-style: none;
+      margin-top: 0.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .tag-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .iframe-wrapper {
+      background: #ffffff;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      padding: 0.7rem 0.7rem 0.5rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    .iframe-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .iframe-label span {
+      font-weight: 500;
+    }
+
+    iframe {
+      width: 100%;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      min-height: 460px;
+      background: #f9fafb;
+    }
+
+    /* Contact & Social */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.3rem;
+    }
+
+    .contact-list {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .contact-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .contact-value a {
+      font-weight: 500;
+      color: var(--primary-dark);
+      word-break: break-all;
+    }
+
+    .social-block {
+      font-size: 0.9rem;
+    }
+
+    .social-block a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #0f172a20;
+      background: #ffffff;
+      font-size: 0.85rem;
+      margin-top: 0.4rem;
+    }
+
+    .social-block a:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    footer {
+      padding: 1rem 0 1.3rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    footer .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      color: var(--primary-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .join-layout,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        position: static;
+      }
+      .nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav ul {
+        display: none;
+      }
+      .nav-cta {
+        display: inline-flex;
+      }
+      iframe {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 1.3rem;
+      }
+      .container {
+        padding: 0 1rem;
+      }
+      .hero-card {
+        margin-top: 0.3rem;
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navbar -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="logo-block">
+          <div class="logo-mark">NCP</div>
+          <div>
+            <div class="logo-text-main">NCP Diaspora UAE</div>
+            <div class="logo-text-sub">National Citizen Party – UAE Diaspora Alliance</div>
+          </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+          <ul>
+            <li><a href="#home">হোম</a></li>
+            <li><a href="#about">আমাদের সম্পর্কে</a></li>
+            <li><a href="#join">সদস্য হোন</a></li>
+            <li><a href="#media">মিডিয়া</a></li>
+            <li><a href="#contact">যোগাযোগ</a></li>
+          </ul>
+        </nav>
+
+        <a href="#join" class="btn btn-primary nav-cta">সদস্য নিবন্ধন</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">
+            <span class="badge-dot"></span>
+            <span>প্রবাসী বাংলাদেশিদের জন্য সংগঠিত প্ল্যাটফর্ম</span>
+          </div>
+          <h1 class="hero-title">
+            <span>NCP Diaspora UAE</span> – প্রবাসী নাগরিকদের সংগঠিত, তথ্যনির্ভর ও দায়িত্বশীল প্ল্যাটফর্ম।
+          </h1>
+          <p class="hero-sub">
+            সংযুক্ত আরব আমিরাতে বসবাসরত বাংলাদেশি নাগরিকদের অধিকার, যোগাযোগ, সংগঠন ও সামাজিক শক্তিকে
+            এক প্ল্যাটফর্মে আনার অঙ্গীকার। সুসংগঠিত ডেটা, সক্রিয় মিডিয়া এবং প্রবাসী-বান্ধব পরিচালনা কাঠামো।
+          </p>
+
+          <div class="hero-actions">
+            <!-- TODO: REPLACE WITH YOUR LIVE GOOGLE FORM LINK -->
+            <a href="YOUR_GOOGLE_FORM_URL_HERE"
+               class="btn btn-primary" target="_blank" rel="noopener">
+              এখনই সদস্য হোন
+            </a>
+
+            <!-- TODO: REPLACE WITH YOUR REAL WHATSAPP GROUP INVITE LINK -->
+            <a href="YOUR_WHATSAPP_GROUP_LINK_HERE"
+               class="btn btn-outline" target="_blank" rel="noopener">
+              হোয়াটস্যাপে আমাদের গ্রুপে যুক্ত হন
+            </a>
+
+            <a href="#contact" class="btn btn-ghost">
+              অফিসিয়াল ইমেইল ও যোগাযোগ
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <span>🔄 ডেটা অটোমেশন–সমৃদ্ধ সদস্য নিবন্ধন</span>
+            <span>📍 Google Maps লোকেশন–ভিত্তিক ম্যাপিং</span>
+            <span>📊 Emirate & District ভিত্তিক ড্যাশবোর্ড</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Snapshot of membership model">
+          <div class="hero-card-tag">Membership Snapshot</div>
+          <div class="hero-card-title">প্রবাসী সদস্য নিবন্ধন – নতুন কাঠামো</div>
+          <ul class="hero-card-list">
+            <li>✅ সম্পূর্ণ বাংলায়, অল্প-শিক্ষিত প্রবাসী ভাইদের জন্য সহজ ফর্ম</li>
+            <li>✅ WhatsApp নম্বর যেভাবেই দিন – সিস্টেম অটো-ফরম্যাট করবে</li>
+            <li>✅ Google Maps পিন দিয়ে সঠিক লোকেশন সংরক্ষণ</li>
+            <li>✅ জেলা–উপজেলা–ইউনিয়ন তথ্যের মাধ্যমে দেশের হোম লিঙ্ক</li>
+            <li>✅ সংগঠনের জন্য রিয়েল-টাইম ড্যাশবোর্ড ও বিশ্লেষণ</li>
+          </ul>
+          <div class="hero-badge-floating">
+            Live • Membership Data Pipeline Enabled
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">আমাদের পরিচয়</div>
+          <h2 class="section-title">NCP Diaspora UAE – কী ও কেন</h2>
+          <p class="section-sub">
+            National Citizen Party (NCP) – Diaspora UAE হচ্ছে এমন একটি প্ল্যাটফর্ম,
+            যেখানে প্রবাসী বাংলাদেশিদের সাংগঠনিক শক্তি, সামাজিক দায়বদ্ধতা ও আধুনিক প্রযুক্তি–ভিত্তিক
+            পরিচালনা একসাথে সমন্বিত হয়।
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="pill">ভিশন</div>
+            <h3>প্রবাসী নাগরিকের মর্যাদা ও সংগঠিত কণ্ঠ</h3>
+            <p>
+              প্রবাসী বাংলাদেশিদের মতামত, সমস্যা ও সম্ভাবনাকে সংগঠিতভাবে তুলে ধরা এবং একটি শক্তিশালী
+              নাগরিক প্ল্যাটফর্ম গড়ে তোলা—যা নীতিনির্ধারণী আলোচনায় রেফারেন্স হিসেবে কাজ করবে।
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill">স্ট্র্যাটেজি</div>
+            <h3>ডেটা–চালিত সংগঠন</h3>
+            <p>
+              প্রতিটি সদস্যের Emirate, লোকেশন, জেলা, থানা–উপজেলা তথ্য সংগ্রহের মাধ্যমে শক্তিশালী
+              ডেটাবেজ তৈরি; যার ওপর ভিত্তি করে মিডিয়া, মাঠপর্যায়ের কার্যক্রম ও ভবিষ্যৎ সিদ্ধান্ত নেওয়া হবে।
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="pill">অপারেশন</div>
+            <h3>ডিজিটাল–ফার্স্ট অপারেশন</h3>
+            <p>
+              Google Workspace, ড্যাশবোর্ড, রিপোর্টিং, WhatsApp ব্রডকাস্ট ও সোশ্যাল মিডিয়া–ভিত্তিক
+              স্মার্ট অপারেশন, যাতে প্রবাসী সদস্যদের সাথে যোগাযোগ দ্রুত ও নির্ভুল থাকে।
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Join / Form -->
+    <section id="join">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">সদস্য নিবন্ধন</div>
+          <h2 class="section-title">NCP Diaspora UAE–এর সদস্য হোন</h2>
+          <p class="section-sub">
+            ফর্মটি খুবই সংক্ষিপ্ত এবং প্রবাসী ভাইদের জন্য সহজভাবে সাজানো—পূর্ণ নাম, Emirate,
+            WhatsApp নম্বর, Google Maps লোকেশন ও বাংলাদেশের জেলা–উপজেলা তথ্য।
+          </p>
+        </div>
+
+        <div class="join-layout">
+          <div>
+            <div class="card">
+              <h3>ফর্মে কী কী লাগবে?</h3>
+              <ul class="tag-list">
+                <li>• আপনার পূর্ণ নাম</li>
+                <li>• আপনি কোন Emirate–এ থাকেন</li>
+                <li>• আপনার WhatsApp নম্বর (যেভাবে লিখেন লিখতে পারবেন)</li>
+                <li>• আপনার বাসার লোকেশনের Google Maps পিন লিংক</li>
+                <li>• বাংলাদেশের জেলা, থানা/উপজেলা, ইউনিয়ন (যদি জানেন)</li>
+              </ul>
+              <br />
+              <p style="font-size:0.85rem; color:var(--muted);">
+                আপনার দেওয়া সব তথ্য শুধুমাত্র NCP Diaspora UAE–এর অভ্যন্তরীণ সাংগঠনিক কাজে ব্যবহৃত হবে।
+                কোনো থার্ড পার্টি বা বহিরাগত কারও সাথে শেয়ার করা হবে না।
+              </p>
+              <br />
+              <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+                <a href="YOUR_GOOGLE_FORM_URL_HERE"
+                   class="btn btn-primary" target="_blank" rel="noopener">
+                  ফর্মটি এখনই পূরণ করুন
+                </a>
+                <a href="YOUR_WHATSAPP_GROUP_LINK_HERE"
+                   class="btn btn-outline" target="_blank" rel="noopener">
+                  হোয়াটস্যাপ গ্রুপে যুক্ত হোন
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="iframe-wrapper">
+            <div class="iframe-label">
+              <span>সরাসরি এই পেজ থেকেই ফর্ম পূরণ করতে পারেন</span>
+              <span style="font-size:0.75rem; color:var(--muted);">
+                যদি embed লোড না হয়, উপরের বাটনে ক্লিক করুন
+              </span>
+            </div>
+            <!-- TODO: এখানে তোমার আসল Google Form-এর EMBED লিংক দিন -->
+            <!-- উদাহরণ: https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true -->
+            <iframe
+              src="YOUR_GOOGLE_FORM_EMBED_URL_HERE"
+              title="NCP Diaspora UAE Membership Form"
+              loading="lazy"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media / Facebook -->
+    <section id="media">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">মিডিয়া ও প্রচার</div>
+          <h2 class="section-title">আমাদের অফিসিয়াল মিডিয়া প্ল্যাটফর্ম</h2>
+          <p class="section-sub">
+            NCP Diaspora UAE–এর অফিসিয়াল তথ্য, প্রোগ্রাম আপডেট, নোটিশ ও ভিজ্যুয়াল কনটেন্ট—
+            সবকিছু প্রকাশিত হবে আমাদের অফিসিয়াল Facebook পেইজ ও ডিজিটাল চ্যানেলগুলোতে।
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>অফিসিয়াল Facebook পেইজ</h3>
+            <p>
+              আমাদের সব আপডেট, প্রোগ্রামের ছবি–ভিডিও, সদস্য ফিচার ও লাইভ সেশন—সবকিছু আপনি এক জায়গায়
+              পাবেন অফিসিয়াল Facebook পেইজে।
+            </p>
+            <br />
+            <div class="social-block">
+              <div>অফিসিয়াল পেইজ লিংক:</div>
+              <a href="https://www.facebook.com/ncpdauae"
+                 target="_blank" rel="noopener">
+                🌐 facebook.com/ncpdauae
+              </a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>ডিজিটাল কমিউনিকেশন</h3>
+            <p style="font-size:0.85rem; color:var(--muted); margin-bottom:0.6rem;">
+              প্রবাসী সদস্যদের সাথে দ্রুত যোগাযোগের জন্য আমরা মূলত WhatsApp গ্রুপ, ব্রডকাস্ট লিস্ট,
+              ইমেইল নিউজলেটার ও Facebook পেইজকে সমন্বিতভাবে ব্যবহার করব।
+            </p>
+            <ul class="tag-list">
+              <li>• জরুরি/দ্রুত আপডেট → WhatsApp গ্রুপ</li>
+              <li>• অফিসিয়াল ঘোষণা ও নোটিশ → ইমেইল + Facebook পেইজ</li>
+              <li>• ডকুমেন্ট, প্রস্তাবনা, রিপোর্ট → Google Workspace</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">যোগাযোগ</div>
+          <h2 class="section-title">অফিসিয়াল ইমেইল ও যোগাযোগ চ্যানেল</h2>
+          <p class="section-sub">
+            মিডিয়া, তথ্য, সদস্য নিবন্ধন, প্রস্তাবনা বা ডোনেশন–সংক্রান্ত যেকোনো বিষয়ে আমাদের সাথে
+            যোগাযোগ করতে নিচের ইমেইল ও চ্যানেলগুলো ব্যবহার করতে পারবেন।
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card">
+            <h3>অফিসিয়াল ইমেইল অ্যাড্রেস</h3>
+            <ul class="contact-list">
+              <li>
+                <div>
+                  <div class="contact-label">Media & Publicity</div>
+                  <div class="contact-value">
+                    <a href="mailto:media@ncpdiasporauae.org">
+                      media@ncpdiasporauae.org
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <div class="contact-label">General Information</div>
+                  <div class="contact-value">
+                    <a href="mailto:info@ncpdiasporauae.org">
+                      info@ncpdiasporauae.org
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <div class="contact-label">Questions / Ask</div>
+                  <div class="contact-value">
+                    <a href="mailto:ask@ncpdiasporauae.org">
+                      ask@ncpdiasporauae.org
+                    </a>
+                  </div>
+                </div>
+              </li>
+
+              <li>
+                <div>
+                  <div class="contact-label">Donations & Support</div>
+                  <div class="contact-value">
+                    <a href="mailto:donations@ncpdiasporauae.org">
+                      donations@ncpdiasporauae.org
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>WhatsApp গ্রুপ ও দ্রুত যোগাযোগ</h3>
+            <p style="font-size:0.85rem; color:var(--muted); margin-bottom:0.6rem;">
+              জরুরি আপডেট ও নিয়মিত কমিউনিকেশনের জন্য আমাদের অফিসিয়াল WhatsApp গ্রুপ ব্যবহার করা হবে।
+              নতুন সদস্যরা যাচাই–বাছাইয়ের পর এই গ্রুপে যুক্ত হবেন।
+            </p>
+            <!-- TODO: replace link -->
+            <a href="YOUR_WHATSAPP_GROUP_LINK_HERE"
+               class="btn btn-outline" target="_blank" rel="noopener"
+               style="margin-bottom:0.5rem;">
+              অফিসিয়াল WhatsApp গ্রুপে যুক্ত হোন
+            </a>
+            <p style="font-size:0.8rem; color:var(--muted);">
+              WhatsApp গ্রুপ লিংক শেয়ার করার আগে অনুরোধ থাকবে—
+              শুধুমাত্র প্রকৃত আগ্রহী ও দায়িত্বশীল সদস্যদের আমন্ত্রণ জানান।
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        © <span id="year"></span> NCP Diaspora UAE ·
+        <span>Domain: ncpdiasporauae.org</span>
+      </div>
+      <div>
+        Powered by Google Workspace & Community Volunteers
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // বছর অটো আপডেট
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
